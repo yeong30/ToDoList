@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do</title>
+    <link rel="styleSheet" href="/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/713cef416d.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Rajdhani:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="src/main.js"></script>
+  </head>
+  <body>
+    <div class="dash-board">
+      <!-- Calendar -->
+      <table class="calendar"></table>
+      <div class="dash-board__content">
+        <header class="dash-board__header">
+          <p class="logo">UUYEONG</p>
+          <div class="login">
+            <p class="login_txt">LOGIN</p>
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          </div>
+        </header>
+        <div class="dash-board__inner-content">
+          <!-- sideMenu -->
+          <ul class="dash-board-menu__list">
+            <li class="menu__item"><i class="fa-solid fa-cloud"></i>Today</li>
+            <li class="menu__item">
+              <i class="fa-solid fa-calendar"></i> Calendar
+            </li>
+            <li class="menu__item" data-btn-type="delete-mod">
+              <i class="fa-solid fa-trash-can"></i>Delete mod
+            </li>
+            <li class="menu__item"><i class="fa-solid fa-cloud"></i> Note</li>
+          </ul>
+          <div class="dash-board__todo">
+            <!-- header -->
+            <header class="todo__header">
+              <p class="title">To Do</p>
+              <p class="todo__date">-.-.-</p>
+            </header>
+            <!-- list -->
+            <ul class="todo__list"></ul>
+            <!-- input -->
+            <div class="todo__add">
+              <form class="todo__form">
+                <input
+                  type="text"
+                  class="todo__input"
+                  placeholder="추가할 Todo를 입력하세요."
+                  end
+                />
+                <button class="btn--main todo__add-btn">Add</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
