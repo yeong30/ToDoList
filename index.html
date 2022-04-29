@@ -21,7 +21,18 @@
   <body>
     <div class="dash-board">
       <!-- Calendar -->
-      <table class="calendar"></table>
+      <div class="calendar__container">
+        <div class="calendar__header">
+          <button class="calendar__btn btn--left">
+            <i class="fa-solid fa-caret-left"></i>
+          </button>
+          <p class="calendar__month">-</p>
+          <button class="calendar__btn btn--right">
+            <i class="fa-solid fa-caret-right"></i>
+          </button>
+        </div>
+        <table class="calendar__body"></table>
+      </div>
       <div class="dash-board__content">
         <header class="dash-board__header">
           <p class="logo">UUYEONG</p>

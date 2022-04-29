@@ -76,10 +76,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid red;
+  align-self: center;
 }
 .dash-board__content {
   width: 75%;
-  margin: 1%;
+  margin: auto;
   background-color: var(--color-white);
   border-radius: var(--radius-border);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -153,10 +155,14 @@ body {
   border-radius: var(--radius-border);
   box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
     rgba(17, 17, 26, 0.1) 0px 0px 8px;
-  width: 90%;
+  width: 95%;
   padding: var(--base-small);
   margin: var(--base-small) 5px;
   font-size: var(--base-normal);
+}
+.todo__item .todo__content {
+  display: inline;
+  border: 1px solid red;
 }
 .todo__item[data-status="checked"] {
   text-decoration: line-through;
@@ -165,8 +171,8 @@ body {
 .todo__item[data-status="deleted"] {
   display: none;
 }
+
 .todo__list .todo__item .fa-circle-minus {
-  color: red;
   font-size: 0px;
   transition: 100ms ease-out all;
   opacity: 0;
@@ -180,13 +186,13 @@ body {
 
 .todo__add {
   /* width: calc(100% - var(--base-normal) * 2); */
-  width: 100%;
+  width: 95%;
   height: 15%;
   /* max-height: 20%; */
 }
 .todo__add-btn {
-  width: 100px;
-
+  max-width: 100px;
+  width: 15%;
   background-color: var(--color-yellow);
   padding: var(--base-small);
   border-radius: 10px;
@@ -199,39 +205,87 @@ body {
   margin: var(--base-small) var(--base-small) 0 0;
   padding: var(--base-small);
   border-radius: 10px;
-  width: calc(90% - (100px + var(--base-small) * 2));
+  /* width: calc(90% - (100px + var(--base-small) * 2));
+   */
+  width: 80%;
   border: 2px solid var(--color-light-gray);
   font-size: var(--base-normal);
 }
 
 /* calendar */
-.calendar {
-  margin: 1%;
+.calendar__container {
+  padding: var(--base-normal);
   background-color: var(--color-white);
+  text-align: center;
+  border-radius: var(--radius-border);
+}
+.calendar__header {
+  font-size: var(--font-size-small);
+  position: relative;
+}
+.calendar__header .calendar__month {
+  display: inline;
+}
+.calendar__btn-left {
+  position: absolute;
+  left: 2px;
+}
+.calendar__btn-right {
+  position: absolute;
+  right: 2px;
+}
+.calendar__body {
   border-collapse: collapse;
   text-align: center;
-  padding: 5px;
   table-layout: fixed;
   word-wrap: break-word;
   cursor: pointer;
 }
-.calendar th {
-  background-color: var(--color-yellow);
-  color: var(--color-white);
+.calendar__body th {
+  color: var(--color-light-gray);
   text-transform: capitalize;
 }
-.calendar td,
+
+.calendar__body td,
 th {
   height: 40px;
   width: 40px;
   position: relative;
 }
-.calendar td.selected span {
+.calendar__body td.selected span {
   display: inline-block;
-  background-color: var(--color-yellow-opacity3);
+  background-color: var(--color-yellow);
   border-radius: 50%;
   text-align: center;
   width: 30px;
   height: 30px;
   line-height: 30px;
+}
+@media only screen and (max-width: 768px) {
+  .calendar__container {
+    display: none;
+  }
+  .dash-board-menu__list .menu__item {
+    padding: var(--base-normal) 0px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .dash-board-menu__list .menu__item i {
+    padding-right: 0;
+    display: block;
+  }
+  .todo__input,
+  .todo__add-btn {
+    padding: 8px;
+    font-size: 13px;
+  }
+  .todo__input {
+    width: calc(70%);
+  }
+
+  .todo__add-btn {
+    border-radius: 10px;
+    font-weight: var(--font-bold);
+    color: transparent;
+  }
 }

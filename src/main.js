@@ -7,7 +7,7 @@ const calendar = new Calendar(today);
 const todo = new ToDo(today, calendar);
 const list = document.querySelector(".todo__list");
 const dashBoard = document.querySelector(".dash-board-menu__list");
-calendar.drawCalendar(today.getFullYear(), today.getMonth() + 1);
+calendar.showCalendar(today);
 todo.setDate(today);
 
 dashBoard.addEventListener("click", (e) => {

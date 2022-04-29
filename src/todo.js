@@ -42,14 +42,14 @@ class ToDo {
 
         let leftBtn = ` <button class="item__delete-btn" data-btn-type="delete">
           <i class="fa-solid fa-circle-minus"  data-id="${item.id}"></i>
-        </button>
-        <p class="todo__content">`;
-        let rightBtn = `</p>
+        </button>`;
+        let rightBtn = `
         <button class="item__check-btn" data-btn-type="check">
           <i class="fa-solid fa-circle-check" data-id="${item.id}"></i>
         </button>`;
-        li.textContent = item.content;
         console.log(li);
+        li.textContent = item.content;
+
         li.insertAdjacentHTML("afterbegin", leftBtn);
         li.insertAdjacentHTML("beforeend", rightBtn);
         this.todo__list.append(li);
@@ -79,15 +79,15 @@ class ToDo {
     li.setAttribute("data-id", uuid);
     li.setAttribute("data-status", "active");
 
-    let leftBtn = ` <button class="item__delete-btn" data-btn-type="delete">
-    <i class="fa-solid fa-circle-minus"  data-id="${uuid}"></i>
-  </button>
-  <p class="todo__content">`;
-    let rightBtn = `</p>
-  <button class="item__check-btn" data-btn-type="check">
-    <i class="fa-solid fa-circle-check" data-id="${uuid}"></i>
+    let leftBtn = ` <button class="item__delete-btn" data-btn-type="deleted">
+    <i class="fa-solid fa-circle-minus"  data-id="${item.id}"></i>
   </button>`;
-    li.textContent = value;
+    let rightBtn = `
+  <button class="item__check-btn" data-btn-type="check">
+    <i class="fa-solid fa-circle-check" data-id="${item.id}"></i>
+  </button>`;
+    console.log(li);
+    li.textContent = item.content;
 
     li.insertAdjacentHTML("afterbegin", leftBtn);
     li.insertAdjacentHTML("beforeend", rightBtn);
@@ -131,8 +131,9 @@ class ToDo {
     }
   }
 }
-function getHash(year, month, date) {
-  return year + "-" + month + "-" + date;
+function getHash(...data) {
+  let hash = data.join("-");
+  return hash;
 }
 function DateToStringFormat(date) {
   let day =
