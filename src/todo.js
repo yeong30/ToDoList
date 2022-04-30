@@ -104,16 +104,17 @@ class ToDo {
   }
   changeMod(e) {
     const target = e.currentTarget;
-    console.log(target);
     if (target.matches(".active")) {
-      this.mod = "delete";
+      this.mod = "active";
       this.todo__list.classList.remove("delete-mod");
       target.classList.remove("active");
     } else {
-      this.mod = "active";
+      this.mod = "delete";
       this.todo__list.classList.add("delete-mod");
       target.classList.add("active");
     }
+    console.log(this.mod);
+
     // this.deleteModBtn.classList.toggle("active");
   }
 }

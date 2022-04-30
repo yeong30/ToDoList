@@ -190,9 +190,8 @@ body {
   transform: translateY(-50%);
 }
 .todo__list .todo__item .fa-circle-minus {
-  /* font-size: 0px; */
+  font-size: var(--base-normal);
 
-  /* opacity: 0; */
   padding-right: 5px;
   color: var(--color-red);
   transform: translateX(-50px);
@@ -200,37 +199,27 @@ body {
 }
 
 .todo__list.delete-mod .todo__item .fa-circle-minus {
-  font-size: var(--base-normal);
-  opacity: 1;
   transform: translateX(0px);
 }
 
-.todo__add {
+.todo__form {
   /* width: calc(100% - var(--base-normal) * 2); */
   width: 95%;
-  height: 15%;
-  /* max-height: 20%; */
+  height: 50px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: var(--base-small);
 }
-.todo__add-btn {
-  max-width: 100px;
-  width: 15%;
-  background-color: var(--color-yellow);
-  padding: var(--base-small);
-  border-radius: 10px;
-  font-weight: var(--font-bold);
-  color: var(--color-white);
-  font-size: var(--base-normal);
-}
-.todo__input {
-  font-family: "Do Hyeon", sans-serif;
-  margin: var(--base-small) var(--base-small) 0 0;
-  padding: var(--base-small);
-  border-radius: 10px;
-  /* width: calc(90% - (100px + var(--base-small) * 2));
-   */
-  width: 80%;
+.todo__form .todo__input {
   border: 2px solid var(--color-light-gray);
-  font-size: var(--base-normal);
+  border-radius: var(--radius-border);
+  font-size: var(--base-small);
+  padding-left: var(--base-xsmall);
+}
+.todo__form .todo__add-btn {
+  background-color: var(--color-yellow);
+  border-radius: var(--radius-border);
+  color: var(--color-white);
 }
 
 /* calendar */
@@ -282,9 +271,13 @@ th {
   height: 30px;
   line-height: 30px;
 }
+
 @media only screen and (max-width: 768px) {
   .calendar__container {
     display: none;
+  }
+  .dash-board__todo {
+    width: 100%;
   }
   .dash-board-menu__list .menu__item {
     font-size: 13px;
@@ -294,18 +287,14 @@ th {
     padding-right: 0;
     display: block;
   }
-  .todo__input,
-  .todo__add-btn {
-    padding: 8px;
-    font-size: 13px;
+  .todo__form .todo__input {
+    font-size: 12px;
   }
-  .todo__input {
-    width: calc(70%);
+  .todo__form {
+    column-gap: 5px;
   }
 
-  .todo__add-btn {
-    border-radius: 10px;
-    font-weight: var(--font-bold);
-    color: transparent;
+  .todo__header .btn__delete-mod {
+    margin-right: 1px;
   }
 }
