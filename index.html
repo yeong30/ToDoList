@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do</title>
+    <title>ToDo</title>
     <link rel="styleSheet" href="/styles.css" />
     <script
       src="https://kit.fontawesome.com/713cef416d.js"
       crossorigin="anonymous"
     ></script>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,13 +27,19 @@
       <div class="dash-board__content">
         <header class="dash-board__header">
           <p class="logo">UUYEONG</p>
-          <ul class="dash-board-menu__list">
-            <li class="menu__item">Today</li>
-            <li class="menu__item">Calendar</li>
-            <li class="menu__item">Note</li>
-            <li class="menu__item">LOGIN</li>
-          </ul>
+          <nav class="nav">
+            <ul class="dash-board-menu__list">
+              <li class="menu__item">Today</li>
+              <li class="menu__item">Calendar</li>
+              <li class="menu__item">Note</li>
+              <li class="menu__item">LOGIN</li>
+            </ul>
+          </nav>
+          <button class="nav__toggle-btn nav__toggle-btn--show">
+            <i class="fa fa-solid fa-bars"></i>
+          </button>
         </header>
+
         <div class="dash-board__inner-content">
           <!-- sideMenu -->
           <div class="calendar__container">

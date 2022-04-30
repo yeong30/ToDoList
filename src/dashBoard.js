@@ -21,9 +21,12 @@ class DashBoard {
     // this.dashBoard = document.querySelector(".dash-board-menu__list");
     this.todoList = new ToDo(date, calendar);
     this.calendar = calendar;
+    this.navToggleBtn = document.querySelector(".nav__toggle-btn");
+    this.navMenu = document.querySelector(".dash-board-menu__list");
+
     this.activeMen;
     this.deleteModBtn = document.querySelector(".btn__delete-mod");
-    // this.dashBoard.addEventListener("click", (e) => this.clickMenuBtns(e));
+    this.navToggleBtn.addEventListener("click", () => this.toggleMenu());
   }
   show() {
     this.linkComponents();
@@ -42,6 +45,11 @@ class DashBoard {
       case "delete-mod":
         this.deleteMod(target);
     }
+  }
+  toggleMenu() {
+    console.log("Call");
+
+    this.navMenu.classList.toggle("nav--show");
   }
 }
 

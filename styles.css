@@ -98,10 +98,10 @@ body {
   padding: var(--base-small);
   border-top-left-radius: var(--radius-border);
   border-top-right-radius: var(--radius-border);
+  position: relative;
+  font-size: var(--font-size-small);
 }
-.dash-board__header .login .login_txt {
-  display: inline-block;
-}
+
 /* content */
 .dash-board__inner-content {
   display: flex;
@@ -110,6 +110,7 @@ body {
 
 .dash-board-menu__list {
   display: flex;
+  justify-content: flex-end;
 }
 .dash-board-menu__list .menu__item {
   cursor: pointer;
@@ -119,6 +120,13 @@ body {
   color: var(--color-black);
 }
 
+.nav__toggle-btn {
+  display: none;
+}
+.nav {
+  width: 100%;
+  text-align: right;
+}
 .dash-board__todo {
   width: 80%;
   padding: var(--base-normal);
@@ -126,8 +134,7 @@ body {
   position: relative;
 }
 .todo__header {
-  height: 20%;
-
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -159,7 +166,7 @@ body {
   font-family: "Do Hyeon", sans-serif;
   padding: var(--base-xlarge) 0;
   overflow: auto;
-  height: 65%;
+  height: 80%;
 }
 .todo__item {
   border-radius: var(--radius-border);
@@ -207,7 +214,7 @@ body {
   width: 95%;
   height: 50px;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 1fr;
   column-gap: var(--base-small);
 }
 .todo__form .todo__input {
@@ -280,7 +287,7 @@ th {
     width: 100%;
   }
   .dash-board-menu__list .menu__item {
-    font-size: 13px;
+    font-size: 15px;
     text-align: center;
   }
   .dash-board-menu__list .menu__item i {
@@ -296,5 +303,32 @@ th {
 
   .todo__header .btn__delete-mod {
     margin-right: 1px;
+  }
+  .dash-board-menu__list {
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    display: none;
+  }
+  .dash-board-menu__list.nav--show {
+    display: block;
+  }
+  .dash-board-menu__list .menu__item {
+    padding-top: var(--base-xsmall);
+    line-height: var(--font-size-small);
+  }
+  .dash-board__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav__toggle-btn {
+    display: block;
+    position: absolute;
+    right: var(--base-small);
+  }
+  .dash-board__todo .todo__list {
+    height: 70%;
   }
 }
