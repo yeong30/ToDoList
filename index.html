@@ -21,43 +21,42 @@
   <body>
     <div class="dash-board">
       <!-- Calendar -->
-      <div class="calendar__container">
-        <div class="calendar__header">
-          <button class="calendar__btn btn--left">
-            <i class="fa-solid fa-caret-left"></i>
-          </button>
-          <p class="calendar__month">-</p>
-          <button class="calendar__btn btn--right">
-            <i class="fa-solid fa-caret-right"></i>
-          </button>
-        </div>
-        <table class="calendar__body"></table>
-      </div>
+
+      <!--  -->
       <div class="dash-board__content">
         <header class="dash-board__header">
           <p class="logo">UUYEONG</p>
-          <div class="login">
-            <p class="login_txt">LOGIN</p>
-            <i class="fa-solid fa-arrow-right-to-bracket"></i>
-          </div>
+          <ul class="dash-board-menu__list">
+            <li class="menu__item">Today</li>
+            <li class="menu__item">Calendar</li>
+            <li class="menu__item">Note</li>
+            <li class="menu__item">LOGIN</li>
+          </ul>
         </header>
         <div class="dash-board__inner-content">
           <!-- sideMenu -->
-          <ul class="dash-board-menu__list">
-            <li class="menu__item"><i class="fa-solid fa-cloud"></i>Today</li>
-            <li class="menu__item">
-              <i class="fa-solid fa-calendar"></i> Calendar
-            </li>
-            <li class="menu__item" data-btn-type="delete-mod">
-              <i class="fa-solid fa-trash-can"></i>Delete mod
-            </li>
-            <li class="menu__item"><i class="fa-solid fa-cloud"></i> Note</li>
-          </ul>
+          <div class="calendar__container">
+            <div class="calendar__header">
+              <button class="calendar__btn btn--left">
+                <i class="fa-solid fa-caret-left"></i>
+              </button>
+              <p class="calendar__month">-</p>
+              <button class="calendar__btn btn--right">
+                <i class="fa-solid fa-caret-right"></i>
+              </button>
+            </div>
+            <table class="calendar__body"></table>
+          </div>
           <div class="dash-board__todo">
             <!-- header -->
             <header class="todo__header">
-              <p class="title">To Do</p>
-              <p class="todo__date">-.-.-</p>
+              <div class="todo__info">
+                <p class="title">To Do</p>
+                <p class="todo__date">-.-.-</p>
+              </div>
+              <button class="btn__delete-mod">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
             </header>
             <!-- list -->
             <ul class="todo__list"></ul>

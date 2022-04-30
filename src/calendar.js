@@ -1,43 +1,40 @@
 const WEEKS = ["Mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
 class Calendar {
-  constructor(date) {
+  constructor() {
     this.calendar = document.querySelector(".calendar__body");
     this.calendar__month = document.querySelector(".calendar__month");
-    this.date = { active: date, display: date };
     this.calendarBtns = document.querySelectorAll(".calendar__btn");
     this.calendarBtns.forEach((btn) => {
       btn.addEventListener("click", (e) => this.changeMonth(e));
     });
-
-    this.calendar.addEventListener("click", (e) => {
-      let target = e.target.closest("td");
-      if (!target) return;
-      this.date.active = new Date(
-        this.date.display.getFullYear(),
-        this.date.display.getMonth(),
-        target.dataset.date
-      );
-      this.selecteDateItem.classList.remove("selected");
-      this.dateClickEvent && this.dateClickEvent(this.date.active);
-      target.classList.add("selected");
-      this.selecteDateItem = target;
-    });
+    this.calendar.addEventListener("click", (e) => this.changeDate(e));
   }
   showCalendar(date) {
-    this.date.active = date;
+    this.date = { active: date, display: date };
     this.drawCalendar(date);
     this.selecteDateItem = document.querySelector(".selected");
   }
   drawCalendar(date) {
     const { firstDateOfMonth, today } = this.processDate(date);
-    const calendarHTML = this.calendarHTML(firstDateOfMonth, today);
-    this.calendar.innerHTML = calendarHTML;
-    this.calendar__month.textContent = processDateToStringFormat(date);
+    this.calendar.innerHTML = this.calendarHTML(firstDateOfMonth, today);
+    this.calendar__month.textContent = dateToHashFormat(date);
   }
-  dateClickListener(f) {
-    this.dateClickEvent = f;
+  changeDate(e) {
+    let target = e.target.closest("td");
+    if (!target) return;
+    this.date.active = new Date(
+      this.date.display.getFullYear(),
+      this.date.display.getMonth(),
+      target.dataset.date
+    );
+    this.selecteDateItem.classList.remove("selected");
+    console.log(this.dateClickEvent);
+    this.dateClickEvent && this.dateClickEvent(this.date.active);
+    target.classList.add("selected");
+    this.selecteDateItem = target;
   }
+
   changeMonth(e) {
     let displayDate;
     let target = e.currentTarget;
@@ -56,12 +53,10 @@ class Calendar {
   processDate(date) {
     let today = new Date().getDate();
     const firstDateOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    this.displayMonth = date.getMonth() + 1;
-
     return { firstDateOfMonth, today };
   }
 
-  calendarHTML(day, today) {
+  calendarHTML(day) {
     let month = day.getMonth();
     let calendarHtml = "<tr>";
     for (let i = 0; i < WEEKS.length; i++) {
@@ -99,12 +94,15 @@ class Calendar {
       }
     return calendarHtml;
   }
+  clickDateEventListener(f) {
+    this.dateClickEvent = f;
+  }
 }
 function getDay(d) {
   if (d.getDay() === 0) return 7;
   else return d.getDay();
 }
-function processDateToStringFormat(date) {
+function dateToHashFormat(date) {
   let month = date.getMonth() + 1;
   let format = date.getFullYear() + " - " + (month < 10 ? "0" + month : month);
   return format;

@@ -26,9 +26,10 @@ async function getTodoList(docName = "2022-01-01") {
   return todoList;
 }
 
-async function insertTodoList(docName, itemId, content) {
-  const todoRef = doc(db, "todo", docName, "items", itemId);
-  await setDoc(
+async function insertTodoList(docName, content) {
+  console.log(docName, content);
+  const todoRef = collection(db, "todo", docName, "items");
+  await addDoc(
     todoRef,
     { ...content, timestamp: serverTimestamp() },
     { merge: true }
