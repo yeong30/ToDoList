@@ -74,8 +74,7 @@ body {
 }
 .dash-board {
   width: 100%;
-  margin: var(--base-xlarge) 0 auto;
-  display: flex;
+  margin: var(--base-xlarge) auto;
   justify-content: space-between;
   align-items: center;
   align-self: center;
@@ -86,6 +85,10 @@ body {
   background-color: var(--color-white);
   border-radius: var(--radius-border);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  position: relative;
 }
 
 /*dash-board  header */
@@ -100,12 +103,18 @@ body {
   border-top-right-radius: var(--radius-border);
   position: relative;
   font-size: var(--font-size-small);
+  position: absolute;
+  width: 100%;
+  z-index: 1;
 }
 
 /* content */
 .dash-board__inner-content {
   display: flex;
   width: 100%;
+  max-height: calc(100% - 70px);
+  min-height: calc(100% - 70px);
+  margin-top: 70px;
 }
 
 .dash-board-menu__list {
@@ -115,9 +124,10 @@ body {
 .dash-board-menu__list .menu__item {
   cursor: pointer;
   padding: 0 var(--base-small);
+  border: 2px solid transparent;
 }
 .dash-board-menu__list .menu__item:hover {
-  color: var(--color-black);
+  color: black;
 }
 
 .nav__toggle-btn {
@@ -130,8 +140,10 @@ body {
 .dash-board__todo {
   width: 80%;
   padding: var(--base-normal);
-  height: 80vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 .todo__header {
   height: auto;
@@ -166,7 +178,8 @@ body {
   font-family: "Do Hyeon", sans-serif;
   padding: var(--base-xlarge) 0;
   overflow: auto;
-  height: 80%;
+  align-items: stretch;
+  margin-bottom: calc(var(--base-xlarge) * 2);
 }
 .todo__item {
   border-radius: var(--radius-border);
@@ -216,6 +229,9 @@ body {
   display: grid;
   grid-template-columns: 3fr 1fr;
   column-gap: var(--base-small);
+  margin-top: var(--base-normal);
+  position: absolute;
+  bottom: var(--base-small);
 }
 .todo__form .todo__input {
   border: 2px solid var(--color-light-gray);
@@ -230,11 +246,17 @@ body {
 }
 
 /* calendar */
+.sideMenu__container {
+  width: 20%;
+}
 .calendar__container {
   padding: var(--base-normal);
   background-color: var(--color-white);
   text-align: center;
   border-radius: var(--radius-border);
+}
+.title {
+  font-size: var(--font-size-large);
 }
 .calendar__header {
   font-size: var(--font-size-small);
@@ -257,6 +279,7 @@ body {
   table-layout: fixed;
   word-wrap: break-word;
   cursor: pointer;
+  margin: auto;
 }
 .calendar__body th {
   color: var(--color-light-gray);
@@ -277,6 +300,33 @@ th {
   width: 30px;
   height: 30px;
   line-height: 30px;
+}
+/* note */
+
+.note__container {
+  padding: var(--base-normal);
+  background-color: var(--color-white);
+  text-align: center;
+  border-radius: var(--radius-border);
+  display: none;
+}
+
+.note__content {
+  margin-top: var(--base-small);
+  max-height: 70%;
+  min-height: 200px;
+}
+.note-btn {
+  display: block;
+  margin: var(--base-xsmall) auto;
+  border: 2px solid black;
+  border-radius: var(--radius-border);
+  padding: calc(var(--base-xsmall) / 2) var(--base-xsmall);
+}
+@media screen and (max-width: 1200px) {
+  .sideMenu__container {
+    width: 40%;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -327,8 +377,5 @@ th {
     display: block;
     position: absolute;
     right: var(--base-small);
-  }
-  .dash-board__todo .todo__list {
-    height: 70%;
   }
 }

@@ -46,13 +46,14 @@ class DashBoard {
     this.calendar.clickDateEventListener(this.todoList.showTodo);
   }
   clickMenuBtns(e) {
+    this.navMenu.classList.remove("nav--show");
+
     this.size = window.outerWidth;
     if (this.size <= 768) {
       alert("PC버전에서 이용가능한 기능입니다.");
       return;
     }
     let target = e.target.closest("li");
-    console.log(target.dataset.btnType);
     if (!target) return;
     // if (!this.activeMen) return;
     switch (target.dataset.btnType) {
