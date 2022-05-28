@@ -1,4 +1,9 @@
-import { getTodoList, insertTodoList, updateTodoItem } from "./api.js";
+const CHECKED = "checked";
+const ACTIVE = "active";
+const DELETE_MOD = "delete-mod";
+const ACTIVE_MOD = "active-mod";
+
+import { getList, insertList, deleteItem, updateItem } from "./api.js";
 class ToDo {
   constructor(date) {
     this.todo__header = document.querySelector(".todo__date");
@@ -10,33 +15,28 @@ class ToDo {
     this.todo__list.addEventListener("click", this.selectTodoItem);
     this.todo__form.addEventListener("submit", this.addTodoItem);
     this.deleteModBtn.addEventListener("click", (e) => this.changeMod(e));
-    this.mod = "active";
+    this.mod = ACTIVE_MOD;
+    this.item_count = 0;
   }
   showTodo = async (date) => {
     this.activeDate = date;
-    let todoList = await getTodoList(DateToHashFormat(date));
+    let todoList = await getList(DateToHashFormat(date));
+    this.item_count = todoList.length;
     this.drawTodoList(todoList, date);
   };
 
   drawTodoList(todoList, date) {
     this.todo__header.textContent = DateToHashFormat(date);
     this.todo__list.innerHTML = "";
-    if (!todoList.length) {
-      this.todo__list.innerHTML = "데이터가 없습니다.";
-    } else {
-      for (let todoItem of todoList) {
-        const li = this.toDoHTML(todoItem);
-        this.todo__list.append(li);
-      }
+    this.itemValidCheck();
+    for (let todoItem of todoList) {
+      const li = this.toDoHTML(todoItem);
+      this.todo__list.append(li);
     }
   }
   toDoHTML(todo) {
     const li = document.createElement("li");
-    const status = todo.deleted
-      ? "deleted"
-      : todo.checked
-      ? "checked"
-      : "active";
+    const status = todo.checked ? CHECKED : ACTIVE;
 
     li.setAttribute("class", "todo__item");
     li.setAttribute("data-id", todo.id);
@@ -59,10 +59,9 @@ class ToDo {
     e.preventDefault();
     let value = this.todo__input.value;
     if (!value) return alert("내용을 입력하세요!");
-    await insertTodoList(DateToHashFormat(this.activeDate), {
+    await insertList(DateToHashFormat(this.activeDate), {
       content: value,
       checked: false,
-      deleted: false,
     });
     this.todo__input.value = "";
     this.todo__input.focus();
@@ -75,47 +74,48 @@ class ToDo {
       target = target.closest("li");
     }
     if (!target) return;
-    if (this.mod === "delete") {
+    if (this.mod === DELETE_MOD) {
       this.deleteTodoItem(DateToHashFormat(this.activeDate), target);
     } else {
       this.checkTodoItem(DateToHashFormat(this.activeDate), target);
     }
   };
   deleteTodoItem(hash, todoItem) {
-    updateTodoItem(hash, todoItem.dataset.id, { deleted: true }).then(() => {
-      todoItem.dataset.status = "deleted";
+    deleteItem(hash, todoItem.dataset.id).then(() => {
+      todoItem.remove();
+      this.item_count--;
+      this.itemValidCheck();
     });
   }
   checkTodoItem(hash, todoItem) {
-    console.log(todoItem);
-    if (todoItem?.dataset.status === "active") {
-      updateTodoItem(hash, todoItem.dataset.id, {
+    if (todoItem?.dataset.status === ACTIVE) {
+      updateItem(hash, todoItem.dataset.id, {
         checked: true,
       }).then(() => {
-        todoItem.dataset.status = "checked";
+        todoItem.dataset.status = CHECKED;
       });
     } else {
-      updateTodoItem(hash, todoItem.dataset.id, {
+      updateItem(hash, todoItem.dataset.id, {
         checked: false,
       }).then(() => {
-        todoItem.dataset.status = "active";
+        todoItem.dataset.status = ACTIVE;
       });
     }
   }
   changeMod(e) {
     const target = e.currentTarget;
-    if (target.matches(".active")) {
-      this.mod = "active";
-      this.todo__list.classList.remove("delete-mod");
-      target.classList.remove("active");
+    if (target.matches("." + ACTIVE_MOD)) {
+      this.mod = ACTIVE_MOD;
+      this.todo__list.classList.remove(DELETE_MOD);
+      target.classList.remove(ACTIVE_MOD);
     } else {
-      this.mod = "delete";
-      this.todo__list.classList.add("delete-mod");
-      target.classList.add("active");
+      this.mod = DELETE_MOD;
+      this.todo__list.classList.add(DELETE_MOD);
+      target.classList.add(ACTIVE_MOD);
     }
-    console.log(this.mod);
-
-    // this.deleteModBtn.classList.toggle("active");
+  }
+  itemValidCheck() {
+    if (this.item_count === 0) this.todo__list.innerHTML = "데이터가 없습니다.";
   }
 }
 

@@ -29,7 +29,6 @@ class Calendar {
       target.dataset.date
     );
     this.selecteDateItem.classList.remove("selected");
-    console.log(this.dateClickEvent);
     this.dateClickEvent && this.dateClickEvent(this.date.active);
     target.classList.add("selected");
     this.selecteDateItem = target;

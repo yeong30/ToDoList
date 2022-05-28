@@ -1,33 +1,28 @@
 import app from "./firebase.js";
 import {
   getFirestore,
-  getDoc,
   doc,
   updateDoc,
-  setDoc,
   addDoc,
-  arrayUnion,
+  deleteDoc,
   collection,
   getDocs,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 const db = getFirestore(app);
-async function getTodoList(docName = "2022-01-01") {
-  console.log("call docName > ", docName);
+async function getList(docName = "2022-01-01") {
   const todoRef = collection(db, "todo", docName, "items");
   const todoSnapshot = await getDocs(todoRef);
   const todoList = todoSnapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
   }));
-  // const todoList = todoSnapshot.exists() ? todoSnapshot.data() : [];
 
   return todoList;
 }
 
-async function insertTodoList(docName, content) {
-  console.log(docName, content);
+async function insertList(docName, content) {
   const todoRef = collection(db, "todo", docName, "items");
   await addDoc(
     todoRef,
@@ -36,9 +31,14 @@ async function insertTodoList(docName, content) {
   );
 }
 
-async function updateTodoItem(docName, itemId, content) {
+async function updateItem(docName, itemId, content) {
   const todoRef = doc(db, "todo", docName, "items", itemId);
   await updateDoc(todoRef, { ...content, timestamp: serverTimestamp() });
 }
 
-export { getTodoList, insertTodoList, updateTodoItem };
+async function deleteItem(docName, itemId) {
+  const todoRef = doc(db, "todo", docName, "items", itemId);
+  await deleteDoc(todoRef);
+}
+
+export { getList, insertList, deleteItem, updateItem };
