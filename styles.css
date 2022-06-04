@@ -247,7 +247,7 @@ body {
 
 /* calendar */
 .sideMenu__container {
-  width: 20%;
+  min-width: 25%;
 }
 .calendar__container {
   padding: var(--base-normal);
@@ -327,6 +327,9 @@ th {
   .sideMenu__container {
     width: 40%;
   }
+  .todo__form .todo__add-btn {
+    width: 80%;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -377,5 +380,8 @@ th {
     display: block;
     position: absolute;
     right: var(--base-small);
+  }
+  .todo__form .todo__add-btn {
+    width: 80%;
   }
 }
