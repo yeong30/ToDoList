@@ -1,44 +1,58 @@
-import app from "./firebase.js";
-import {
-  getFirestore,
-  doc,
-  updateDoc,
-  addDoc,
-  deleteDoc,
-  collection,
-  getDocs,
-  serverTimestamp,
-} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-
-const db = getFirestore(app);
+const DOMAIN = "http://127.0.0.1:3000/todos/";
 async function getList(docName = "2022-01-01") {
-  const todoRef = collection(db, "todo", docName, "items");
-  const todoSnapshot = await getDocs(todoRef);
-  const todoList = todoSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  let todos = [];
+  try {
+    let result = await fetch(DOMAIN + "getTodos?register_data=" + docName);
+    let data = await result.json();
 
-  return todoList;
+    if (data && data !== {}) {
+      for (let key in data.body) {
+        todos.push({ ...data.body[key], id: key });
+      }
+    }
+  } catch (error) {
+    alert(error);
+  }
+  return todos;
 }
 
-async function insertList(docName, content) {
-  const todoRef = collection(db, "todo", docName, "items");
-  await addDoc(
-    todoRef,
-    { ...content, timestamp: serverTimestamp() },
-    { merge: true }
-  );
+async function insertList(docName, requsetTodo) {
+  let result = await fetch(DOMAIN + "addTodo", {
+    method: "POST",
+
+    body: JSON.stringify({
+      content: requsetTodo.content,
+      checked: requsetTodo.checked,
+      register_date: docName,
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 async function updateItem(docName, itemId, content) {
-  const todoRef = doc(db, "todo", docName, "items", itemId);
-  await updateDoc(todoRef, { ...content, timestamp: serverTimestamp() });
+  let result = await fetch(DOMAIN + "update/checked", {
+    method: "POST",
+    body: JSON.stringify({
+      id: itemId,
+      register_date: docName,
+      checked: content.checked,
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
+  console.log(result);
+  return result;
 }
 
 async function deleteItem(docName, itemId) {
-  const todoRef = doc(db, "todo", docName, "items", itemId);
-  await deleteDoc(todoRef);
+  let result = await fetch(DOMAIN + "deleteTodo", {
+    method: "DELETE",
+    body: JSON.stringify({
+      id: itemId,
+      register_date: docName,
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
+  return result;
 }
 
 export { getList, insertList, deleteItem, updateItem };

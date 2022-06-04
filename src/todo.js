@@ -35,6 +35,7 @@ class ToDo {
     }
   }
   toDoHTML(todo) {
+    console.log(todo);
     const li = document.createElement("li");
     const status = todo.checked ? CHECKED : ACTIVE;
 
