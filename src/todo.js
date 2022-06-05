@@ -65,7 +65,6 @@ class ToDo {
       checked: false,
     });
     this.todo__input.value = "";
-    this.todo__input.focus();
     await this.showTodo(this.activeDate);
   };
 

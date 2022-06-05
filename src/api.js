@@ -31,7 +31,7 @@ async function insertList(register_date, requsetTodo) {
   });
 }
 
-async function updateItem(docName, itemId, content) {
+async function updateItem(register_date, itemId, content) {
   let result = await fetch(DOMAIN + "update/checked", {
     method: "POST",
     body: JSON.stringify({
