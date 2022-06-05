@@ -1,8 +1,8 @@
-const DOMAIN = "http://127.0.0.1:3000/todos/";
+const DOMAIN = "https://yeong-todos.herokuapp.com/todos/";
 async function getList(docName = "2022-01-01") {
   let todos = [];
   try {
-    let result = await fetch(DOMAIN + "getTodos?register_data=" + docName);
+    let result = await fetch(DOMAIN + "getTodos?register_date=" + docName);
     let data = await result.json();
 
     if (data && data !== {}) {
