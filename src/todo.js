@@ -17,12 +17,15 @@ class ToDo {
     this.deleteModBtn.addEventListener("click", (e) => this.changeMod(e));
     this.mod = ACTIVE_MOD;
     this.item_count = 0;
+    this.loading = document.querySelector(".loading");
   }
   showTodo = async (date) => {
+    this.chaneLoadingStatus();
     this.activeDate = date;
     let todoList = await getList(DateToHashFormat(date));
     this.item_count = todoList.length;
     this.drawTodoList(todoList, date);
+    this.chaneLoadingStatus();
   };
 
   drawTodoList(todoList, date) {
@@ -116,6 +119,9 @@ class ToDo {
   }
   itemValidCheck() {
     if (this.item_count === 0) this.todo__list.innerHTML = "데이터가 없습니다.";
+  }
+  chaneLoadingStatus() {
+    this.loading.classList.toggle("active");
   }
 }
 
