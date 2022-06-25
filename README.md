@@ -3,6 +3,7 @@
 프로젝트 기간 : 2022.03.15 ~ 05.30
 참여인원 : 1인(개인 프로젝트)
 <br/>
+
 # 프로젝트 소개
 
 사용자 입력을 통해 TO-DO 리스트를 작성할 수 있씁니다.
@@ -21,13 +22,12 @@
 
 # 기술 스택
 
- * Front End
-   * node.js
-   * JavaScript, HTML, CSS
-   
- * Back End
-   * node.js
-   * firebase Realtime Database
+- Front End
+  - node.js
+  - JavaScript, HTML, CSS
+- Back End
+  - node.js
+  - firebase Realtime Database
 
 <br/>
 
@@ -35,8 +35,10 @@
 
 1.~~현재 클래스로 모듈화한 함수가 그다지 효율적으로 보이지 않는다. 리팩토링이 필요해보인다.~~(04.30 1차 수정).
 
-2. ~~현재 delete된 목록은 disaply:none 처리를 하였는데 아예 DB에서 delete를 하도록 수정이 필요하다.~~(05.29 수정) 
+2. ~~현재 delete된 목록은 disaply:none 처리를 하였는데 아예 DB에서 delete를 하도록 수정이 필요하다.~~(05.29 수정)
 
 3. 모바일 버전 지원이 필요하다.(04.30 달력 외 구현)
- 
+
 4.~~인증키 보관 문제로 DataBase 변경 혹은 별도 서버 구현필요~~(06.05- node서버 구현)
+
+5.~~로딩바 추가~~(06.25)
