@@ -20,12 +20,12 @@ class ToDo {
     this.loading = document.querySelector(".loading");
   }
   showTodo = async (date) => {
-    this.chaneLoadingStatus();
+    this.chaneLoadingStatus(true);
     this.activeDate = date;
     let todoList = await getList(DateToHashFormat(date));
     this.item_count = todoList.length;
     this.drawTodoList(todoList, date);
-    this.chaneLoadingStatus();
+    this.chaneLoadingStatus(false);
   };
 
   drawTodoList(todoList, date) {
@@ -38,7 +38,6 @@ class ToDo {
     }
   }
   toDoHTML(todo) {
-    console.log(todo);
     const li = document.createElement("li");
     const status = todo.checked ? CHECKED : ACTIVE;
 
@@ -63,6 +62,7 @@ class ToDo {
     e.preventDefault();
     let value = this.todo__input.value;
     if (!value) return alert("내용을 입력하세요!");
+    this.chaneLoadingStatus(true);
     await insertList(DateToHashFormat(this.activeDate), {
       content: value,
       checked: false,
@@ -72,6 +72,8 @@ class ToDo {
   };
 
   selectTodoItem = (e) => {
+    this.chaneLoadingStatus(true);
+
     let target = e.target;
     if (target.nodeName === "I") {
       target = target.closest("li");
@@ -82,6 +84,7 @@ class ToDo {
     } else {
       this.checkTodoItem(DateToHashFormat(this.activeDate), target);
     }
+    this.chaneLoadingStatus(false);
   };
   deleteTodoItem(hash, todoItem) {
     deleteItem(hash, todoItem.dataset.id).then(() => {
@@ -120,8 +123,11 @@ class ToDo {
   itemValidCheck() {
     if (this.item_count === 0) this.todo__list.innerHTML = "데이터가 없습니다.";
   }
-  chaneLoadingStatus() {
-    this.loading.classList.toggle("active");
+  chaneLoadingStatus(flag) {
+    if (flag) {
+      this.loading.classList.add("active");
+      return;
+    } else this.loading.classList.remove("active");
   }
 }
 
