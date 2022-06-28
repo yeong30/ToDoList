@@ -23,7 +23,7 @@
 
 <br/>
 
-#🔨 기술 스택
+# 🔨 기술 스택
 Frontend : JavaScript, HTML, CSS
 
 Backend : node.js
