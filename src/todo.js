@@ -18,6 +18,7 @@ class ToDo {
     this.mod = ACTIVE_MOD;
     this.item_count = 0;
     this.loading = document.querySelector(".loading");
+    this.doubleclickResource = null;
   }
   showTodo = async (date) => {
     this.chaneLoadingStatus(true);
@@ -63,16 +64,27 @@ class ToDo {
     let value = this.todo__input.value;
     if (!value) return alert("내용을 입력하세요!");
     this.chaneLoadingStatus(true);
+    if (this.doubleclickResource) return;
+    this.doubleclickResource = this.activeDate;
     await insertList(DateToHashFormat(this.activeDate), {
       content: value,
       checked: false,
     });
     this.todo__input.value = "";
     await this.showTodo(this.activeDate);
+    this.doubleclickResource = null;
   };
 
-  selectTodoItem = (e) => {
+  selectTodoItem = async (e) => {
+    if (this.doubleResource || !e.target.dataset.id) return;
+    this.doubleclickResource = e.target.dataset.id;
+
     this.chaneLoadingStatus(true);
+    await new Promise((resolve, rej) => {
+      setTimeout(() => {
+        resolve();
+      }, 100);
+    });
 
     let target = e.target;
     if (target.nodeName === "I") {
@@ -84,14 +96,17 @@ class ToDo {
     } else {
       this.checkTodoItem(DateToHashFormat(this.activeDate), target);
     }
+    this.doubleclickResource = "";
     this.chaneLoadingStatus(false);
   };
-  deleteTodoItem(hash, todoItem) {
-    deleteItem(hash, todoItem.dataset.id).then(() => {
+  async deleteTodoItem(hash, todoItem) {
+    const deletedId = await deleteItem(hash, todoItem.dataset.id);
+
+    if (todoItem.dataset.id === deletedId) {
       todoItem.remove();
       this.item_count--;
       this.itemValidCheck();
-    });
+    }
   }
   checkTodoItem(hash, todoItem) {
     if (todoItem?.dataset.status === ACTIVE) {
