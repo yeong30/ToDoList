@@ -92,9 +92,9 @@ class ToDo {
     }
     if (!target) return;
     if (this.mod === DELETE_MOD) {
-      this.deleteTodoItem(DateToHashFormat(this.activeDate), target);
+      await this.deleteTodoItem(DateToHashFormat(this.activeDate), target);
     } else {
-      this.checkTodoItem(DateToHashFormat(this.activeDate), target);
+      await this.checkTodoItem(DateToHashFormat(this.activeDate), target);
     }
     this.doubleclickResource = "";
     this.chaneLoadingStatus(false);
@@ -108,15 +108,15 @@ class ToDo {
       this.itemValidCheck();
     }
   }
-  checkTodoItem(hash, todoItem) {
+  async checkTodoItem(hash, todoItem) {
     if (todoItem?.dataset.status === ACTIVE) {
-      updateItem(hash, todoItem.dataset.id, {
+      await updateItem(hash, todoItem.dataset.id, {
         checked: true,
       }).then(() => {
         todoItem.dataset.status = CHECKED;
       });
     } else {
-      updateItem(hash, todoItem.dataset.id, {
+      await updateItem(hash, todoItem.dataset.id, {
         checked: false,
       }).then(() => {
         todoItem.dataset.status = ACTIVE;
