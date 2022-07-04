@@ -40,7 +40,6 @@ class DashBoard {
     this.linkComponents();
     this.calendar.showCalendar(this.activeDate);
     this.todoList.showTodo(this.activeDate);
-    console.log(this.todoList);
   }
   linkComponents() {
     this.calendar.clickDateEventListener(this.todoList.showTodo);

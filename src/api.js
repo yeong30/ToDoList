@@ -41,12 +41,11 @@ async function updateItem(register_date, itemId, content) {
     }),
     headers: { "Content-Type": "application/json" },
   });
-  console.log(result);
   return result;
 }
 
 async function deleteItem(register_date, itemId) {
-  let result = await fetch(DOMAIN + "deleteTodo", {
+  await fetch(DOMAIN + "deleteTodo", {
     method: "DELETE",
     body: JSON.stringify({
       id: itemId,
@@ -54,7 +53,7 @@ async function deleteItem(register_date, itemId) {
     }),
     headers: { "Content-Type": "application/json" },
   });
-  return result;
+  return itemId;
 }
 
 export { getList, insertList, deleteItem, updateItem };
