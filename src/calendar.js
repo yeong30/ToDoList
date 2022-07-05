@@ -22,7 +22,7 @@ class Calendar {
   }
   changeDate(e) {
     let target = e.target.closest("td");
-    if (!target) return;
+    if (!target || !target.dataset.date) return;
     this.date.active = new Date(
       this.date.display.getFullYear(),
       this.date.display.getMonth(),
