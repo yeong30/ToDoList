@@ -1,3 +1,4 @@
+import styles from "../public/styles.css";
 import { Calendar } from "./calendar.js";
 import { Note } from "./note.js";
 import { DashBoardBuilder } from "./dashBoard.js";
