@@ -27,7 +27,10 @@ module.exports = {
 
   mode: "production",
   plugins: [
-    new HtmlWebpackPlugin({ template: "/public/index.html" }),
+    new HtmlWebpackPlugin({
+      template: "/public/index.html",
+      favicon: "assets/favicon.ico",
+    }),
     new webpack.EnvironmentPlugin({
       //환경변수 설정
       NODE_ENV: "production",
